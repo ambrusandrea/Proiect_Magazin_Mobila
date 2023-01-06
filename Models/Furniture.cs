@@ -16,6 +16,7 @@ namespace Proiect_Magazin_Mobila.Models
         public decimal Price { get; set; }
         public int? DesignerID { get; set; }
         public Designer? Designer { get; set; }
+        public ICollection<FurnitureMaterial>? FurnitureMaterials { get; set; }
 
     }
 }

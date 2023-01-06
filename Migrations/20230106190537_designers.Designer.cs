@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proiect_Magazin_Mobila.Data;
 
@@ -11,9 +12,10 @@ using Proiect_Magazin_Mobila.Data;
 namespace Proiect_Magazin_Mobila.Migrations
 {
     [DbContext(typeof(Proiect_Magazin_MobilaContext))]
-    partial class Proiect_Magazin_MobilaContextModelSnapshot : ModelSnapshot
+    [Migration("20230106190537_designers")]
+    partial class designers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,46 +70,6 @@ namespace Proiect_Magazin_Mobila.Migrations
                     b.ToTable("Furniture");
                 });
 
-            modelBuilder.Entity("Proiect_Magazin_Mobila.Models.FurnitureMaterial", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<int>("FurnitureID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MaterialID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("FurnitureID");
-
-                    b.HasIndex("MaterialID");
-
-                    b.ToTable("FurnitureMaterial");
-                });
-
-            modelBuilder.Entity("Proiect_Magazin_Mobila.Models.Material", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("MaterialName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Material");
-                });
-
             modelBuilder.Entity("Proiect_Magazin_Mobila.Models.Furniture", b =>
                 {
                     b.HasOne("Proiect_Magazin_Mobila.Models.Designer", "Designer")
@@ -117,38 +79,9 @@ namespace Proiect_Magazin_Mobila.Migrations
                     b.Navigation("Designer");
                 });
 
-            modelBuilder.Entity("Proiect_Magazin_Mobila.Models.FurnitureMaterial", b =>
-                {
-                    b.HasOne("Proiect_Magazin_Mobila.Models.Furniture", "Furniture")
-                        .WithMany("FurnitureMaterials")
-                        .HasForeignKey("FurnitureID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Proiect_Magazin_Mobila.Models.Material", "Material")
-                        .WithMany("FurnitureMaterials")
-                        .HasForeignKey("MaterialID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Furniture");
-
-                    b.Navigation("Material");
-                });
-
             modelBuilder.Entity("Proiect_Magazin_Mobila.Models.Designer", b =>
                 {
                     b.Navigation("Furnitures");
-                });
-
-            modelBuilder.Entity("Proiect_Magazin_Mobila.Models.Furniture", b =>
-                {
-                    b.Navigation("FurnitureMaterials");
-                });
-
-            modelBuilder.Entity("Proiect_Magazin_Mobila.Models.Material", b =>
-                {
-                    b.Navigation("FurnitureMaterials");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "/"
 @model Proiect_Magazin_Mobila.Pages.Furnitures.IndexModel
 
 @{
@@ -25,12 +25,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.Furniture[0].Designer.LastName)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Furniture[0].FurnitureMaterials)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Furniture) {
-        <tr>
+@foreach (var item in Model.FurnitureD.Furnitures) {
+ string selectedRow = "";
+ if (item.ID == Model.FurnitureID)
+ {
+ selectedRow = "table-success";
+ }
+ <tr class="@selectedRow">
+
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -42,6 +51,14 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Designer.LastName)
+                </td>
+                <td>
+                    @{
+                        foreach (var material in item.FurnitureMaterials)
+                        {
+                            @material.Material.ID @: @material.Material.MaterialName <br />
+                        }
+                    }
                 </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proiect_Magazin_Mobila.Data;
 
@@ -11,9 +12,10 @@ using Proiect_Magazin_Mobila.Data;
 namespace Proiect_Magazin_Mobila.Migrations
 {
     [DbContext(typeof(Proiect_Magazin_MobilaContext))]
-    partial class Proiect_Magazin_MobilaContextModelSnapshot : ModelSnapshot
+    [Migration("20230106191152_furniturematerial")]
+    partial class furniturematerial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

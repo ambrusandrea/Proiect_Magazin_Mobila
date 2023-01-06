@@ -11,7 +11,7 @@ using Proiect_Magazin_Mobila.Models;
 
 namespace Proiect_Magazin_Mobila.Pages.Furnitures
 {
-    public class EditModel : PageModel
+    public class EditModel : FurnitureMaterialPageModel
     {
         private readonly Proiect_Magazin_Mobila.Data.Proiect_Magazin_MobilaContext _context;
 
@@ -29,6 +29,14 @@ namespace Proiect_Magazin_Mobila.Pages.Furnitures
             {
                 return NotFound();
             }
+            Furniture = await _context.Furniture
+                 .Include(b => b.Designer)
+                 .Include(b => b.FurnitureMaterials).ThenInclude(b => b.Material)
+                 .AsNoTracking()
+                 .FirstOrDefaultAsync(m => m.ID == id);
+
+            PopulateAssignedMaterialData(_context, Furniture);
+
 
             var furniture =  await _context.Furniture.FirstOrDefaultAsync(m => m.ID == id);
             if (furniture == null)
@@ -42,37 +50,39 @@ namespace Proiect_Magazin_Mobila.Pages.Furnitures
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id, string[]selectedMaterials)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
-
-            _context.Attach(Furniture).State = EntityState.Modified;
-
-            try
+            //se va include Author conform cu sarcina de la lab 2
+            var furnitureToUpdate = await _context.Furniture
+            .Include(i => i.Designer)
+            .Include(i => i.FurnitureMaterials)
+            .ThenInclude(i => i.Material)
+            .FirstOrDefaultAsync(s => s.ID == id);
+            if (furnitureToUpdate == null)
             {
+                return NotFound();
+            }
+            //se va modifica AuthorID conform cu sarcina de la lab 2
+            if (await TryUpdateModelAsync<Furniture>(
+            furnitureToUpdate,
+            "Furniture",
+            i => i.Name, i => i.Price,
+            i => i.DesignerID))
+            {
+                UpdateFurnitureMaterials(_context, selectedMaterials, furnitureToUpdate);
                 await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FurnitureExists(Furniture.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
-        }
-
-        private bool FurnitureExists(int id)
-        {
-          return _context.Furniture.Any(e => e.ID == id);
+            //Apelam UpdateBookCategories pentru a aplica informatiile din checkboxuri la entitatea Books care
+            //este editata
+            UpdateFurnitureMaterials(_context, selectedMaterials, furnitureToUpdate);
+            PopulateAssignedMaterialData(_context, furnitureToUpdate);
+            return Page();
         }
     }
+
 }

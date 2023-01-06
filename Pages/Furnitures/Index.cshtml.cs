@@ -19,16 +19,30 @@ namespace Proiect_Magazin_Mobila.Pages.Furnitures
             _context = context;
         }
 
-        public IList<Furniture> Furniture { get;set; } = default!;
+        public IList<Furniture> Furniture { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public FurnitureData FurnitureD { get; set; }
+        public int FurnitureID { get; set; }
+        public int MaterialID { get; set; }
+        public async Task OnGetAsync(int? id, int? materialID)
         {
-            if (_context.Furniture != null)
+            FurnitureD = new FurnitureData();
+
+            FurnitureD.Furnitures = await _context.Furniture
+            .Include(b => b.Designer)
+            .Include(b => b.FurnitureMaterials)
+            .ThenInclude(b => b.Material)
+            .AsNoTracking()
+            .OrderBy(b => b.Name)
+            .ToListAsync();
+            if (id != null)
             {
-                Furniture = await _context.Furniture
-                    .Include(b => b.Designer)
-                    .ToListAsync();
+                FurnitureID = id.Value;
+                Furniture furniture = FurnitureD.Furnitures
+                .Where(i => i.ID == id.Value).Single();
+                FurnitureD.Materials = furniture.FurnitureMaterials.Select(s => s.Material);
             }
         }
+
     }
 }
