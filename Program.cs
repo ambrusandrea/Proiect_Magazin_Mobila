@@ -1,7 +1,12 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Proiect_Magazin_Mobila.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<Proiect_Magazin_MobilaContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Proiect_Magazin_MobilaContext") ?? throw new InvalidOperationException("Connection string 'Proiect_Magazin_MobilaContext' not found.")));
 
 var app = builder.Build();
 
