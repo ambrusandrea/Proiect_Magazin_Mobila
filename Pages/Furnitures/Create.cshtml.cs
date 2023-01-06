@@ -23,7 +23,9 @@ namespace Proiect_Magazin_Mobila.Pages.Furnitures
 
         public IActionResult OnGet()
         {
-            ViewData["DesignerID"] = new SelectList(_context.Set<Designer>(), "ID", "FirstName", "LastName");
+            ViewData["DesignerID"] = new SelectList(_context.Set<Designer>(), "ID", "FullName");
+            ViewData["CategoryID"] = new SelectList(_context.Set<Category>(), "ID",
+"CategoryName");
             var furniture = new Furniture();
             furniture.FurnitureMaterials = new List<FurnitureMaterial>();
             PopulateAssignedMaterialData(_context, furniture);

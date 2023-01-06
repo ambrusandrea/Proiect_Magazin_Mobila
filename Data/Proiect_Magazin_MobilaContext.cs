@@ -19,5 +19,7 @@ namespace Proiect_Magazin_Mobila.Data
         public DbSet<Proiect_Magazin_Mobila.Models.Designer> Designer { get; set; }
 
         public DbSet<Proiect_Magazin_Mobila.Models.Material> Material { get; set; }
+
+        public DbSet<Proiect_Magazin_Mobila.Models.Category> Category { get; set; }
     }
 }

@@ -14,6 +14,8 @@ namespace Proiect_Magazin_Mobila.Models
         public string Name { get; set; }
         [Column(TypeName = "decimal(6, 2)")]
         public decimal Price { get; set; }
+        public int? CategoryID { get; set; }
+        public Category? Categories { get; set; }
         public int? DesignerID { get; set; }
         public Designer? Designer { get; set; }
         public ICollection<FurnitureMaterial>? FurnitureMaterials { get; set; }

@@ -30,6 +30,7 @@ namespace Proiect_Magazin_Mobila.Pages.Furnitures
 
             FurnitureD.Furnitures = await _context.Furniture
             .Include(b => b.Designer)
+            .Include(b => b.Categories)
             .Include(b => b.FurnitureMaterials)
             .ThenInclude(b => b.Material)
             .AsNoTracking()

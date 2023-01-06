@@ -29,6 +29,12 @@
                 </select>
                 <span asp-validation-for="Furniture.DesignerID" class="text-danger"></span>
             </div>
+             <div class="form-group">
+                <label asp-for="Furniture.CategoryID" class="control-label">Category Name</label>
+                <select asp-for="Furniture.CategoryID" class="form-control" asp-items="ViewBag.CategoryID">
+                </select>
+                <span asp-validation-for="Furniture.CategoryID" class="text-danger"></span>
+            </div>
             <div class="form-group">
  <div class="table">
  <table>

@@ -44,7 +44,9 @@ namespace Proiect_Magazin_Mobila.Pages.Furnitures
                 return NotFound();
             }
             Furniture = furniture;
-            ViewData["DesignerID"] = new SelectList(_context.Set<Designer>(), "ID", "FirstName", "LastName");
+            ViewData["DesignerID"] = new SelectList(_context.Set<Designer>(), "ID", "FullName");
+            ViewData["CategoryID"] = new SelectList(_context.Set<Category>(), "ID",
+ "CategoryName");
             return Page();
         }
 
