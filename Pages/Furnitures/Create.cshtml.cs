@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Policy;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +14,7 @@ using Proiect_Magazin_Mobila.Models;
 
 namespace Proiect_Magazin_Mobila.Pages.Furnitures
 {
+    [Authorize(Roles = "Admin")]
     public class CreateModel : FurnitureMaterialPageModel
     {
         private readonly Proiect_Magazin_Mobila.Data.Proiect_Magazin_MobilaContext _context;
