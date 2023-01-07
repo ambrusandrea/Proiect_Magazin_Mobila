@@ -17,6 +17,9 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AllowAnonymousToPage("/Furnitures/Index");
     options.Conventions.AllowAnonymousToPage("/Furnitures/Details");
     options.Conventions.AuthorizeFolder("/Members", "AdminPolicy");
+    options.Conventions.AuthorizeFolder("/Categories", "AdminPolicy");
+    options.Conventions.AuthorizeFolder("/Materials", "AdminPolicy");
+    options.Conventions.AuthorizeFolder("/Designers", "AdminPolicy");
 
 });
 builder.Services.AddDbContext<Proiect_Magazin_MobilaContext>(options =>
