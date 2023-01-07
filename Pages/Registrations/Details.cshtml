@@ -1,0 +1,37 @@
+﻿@page
+@model Proiect_Magazin_Mobila.Pages.Registrations.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Registration</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Registration.Member)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Registration.Member.ID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Registration.Furniture)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Registration.Furniture.ID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Registration.ReturnDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Registration.ReturnDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Registration?.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

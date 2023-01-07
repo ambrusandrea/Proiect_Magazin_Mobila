@@ -21,5 +21,9 @@ namespace Proiect_Magazin_Mobila.Data
         public DbSet<Proiect_Magazin_Mobila.Models.Material> Material { get; set; }
 
         public DbSet<Proiect_Magazin_Mobila.Models.Category> Category { get; set; }
+
+        public DbSet<Proiect_Magazin_Mobila.Models.Member> Member { get; set; }
+
+        public DbSet<Proiect_Magazin_Mobila.Models.Registration> Registration { get; set; }
     }
 }
