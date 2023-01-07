@@ -14,8 +14,8 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AuthorizeFolder("/Furnitures");
-    options.Conventions.AllowAnonymousToPage("/Furnitures/Index");
-    options.Conventions.AllowAnonymousToPage("/Furnitures/Details");
+    //options.Conventions.AllowAnonymousToPage("/Furnitures/Index");
+   // options.Conventions.AllowAnonymousToPage("/Furnitures/Details");
     options.Conventions.AuthorizeFolder("/Members", "AdminPolicy");
     options.Conventions.AuthorizeFolder("/Categories", "AdminPolicy");
     options.Conventions.AuthorizeFolder("/Materials", "AdminPolicy");
