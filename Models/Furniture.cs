@@ -18,7 +18,10 @@ namespace Proiect_Magazin_Mobila.Models
         public Category? Categories { get; set; }
         public int? DesignerID { get; set; }
         public Designer? Designer { get; set; }
-       
+        public int? MemberID { get; set; }
+        public Member? Member { get; set; }
+        public int? RegistrationID { get; set; }
+        public Registration? Registration { get; set; }
         public ICollection<FurnitureMaterial>? FurnitureMaterials { get; set; }
 
     }
