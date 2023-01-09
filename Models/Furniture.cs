@@ -13,7 +13,7 @@ namespace Proiect_Magazin_Mobila.Models
 
         public string Name { get; set; }
         [Column(TypeName = "decimal(6, 2)")]
-        [Range(0.01, 500)]
+        [Range(0.01, 100000)]
 
         public decimal Price { get; set; }
         public int? CategoryID { get; set; }
